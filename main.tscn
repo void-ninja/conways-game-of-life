@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://b41ppcg8xkwyh"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_jsdtr"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_jsdtr")
+
+[node name="GridDisplay" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Toolbar" type="ColorRect" parent="GUI"]
+offset_top = 717.0
+offset_right = 800.0
+offset_bottom = 800.0
+color = Color(0.339605, 0.463996, 0.490431, 1)
+
+[node name="ColorRect" type="ColorRect" parent="GUI/Toolbar"]
+layout_mode = 0
+offset_top = 67.0
+offset_right = 800.0
+offset_bottom = 83.0
+color = Color(0.231395, 0.325574, 0.346782, 1)
+
+[node name="ToggleSim" type="Button" parent="GUI/Toolbar"]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 11.0
+offset_right = 439.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 20
+text = "Start"
