@@ -7,9 +7,15 @@ const ZOOM_SENSITIVITY = 1.1
 
 @onready var grid_display: Node2D = $GridDisplay
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var square = preload("res://square.tscn")
+@onready var toggle_sim_button: Button = $GUI/Toolbar/ToggleSimButton
 
 ### Y axis is grid[], X axis is grid[][]
 var grid : Array
+var is_simulating : bool = false
+
+var tick_speed :float = 1 #in seconds, roughly
+var elapsed_time :float
 
 
 func _ready() -> void:
@@ -18,6 +24,16 @@ func _ready() -> void:
 			(SQUARE_SIZE_IN_PIXELS * GRID_SIDE_LENGTH_IN_SQUARES) / 2, 
 			(SQUARE_SIZE_IN_PIXELS * GRID_SIDE_LENGTH_IN_SQUARES) / 2
 	)
+	
+
+func _process(delta: float) -> void:
+	if is_simulating:
+		elapsed_time += delta
+		if elapsed_time >= tick_speed:
+			
+			#TODO Simulate here
+			
+			elapsed_time = 0
 	
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -37,7 +53,16 @@ func populate_grid() -> void:
 	for y in GRID_SIDE_LENGTH_IN_SQUARES:
 		var array : Array
 		for x in GRID_SIDE_LENGTH_IN_SQUARES: 
-			var square = preload("res://square.tscn").instantiate()
-			grid_display.add_child(square)
-			square.position = Vector2(x * SQUARE_SIZE_IN_PIXELS,y * SQUARE_SIZE_IN_PIXELS)
+			var new_square = square.instantiate()
+			grid_display.add_child(new_square)
+			new_square.position = Vector2(x * SQUARE_SIZE_IN_PIXELS,y * SQUARE_SIZE_IN_PIXELS)
 		grid.append(array)
+
+
+func _on_toggle_sim_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		toggle_sim_button.text = "Stop"
+		is_simulating = true
+	else:
+		toggle_sim_button.text = "Start"
+		is_simulating = false
