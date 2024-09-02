@@ -93,11 +93,19 @@ text = "Reset"
 
 [node name="Randomize" type="Button" parent="GUI/Toolbar"]
 layout_mode = 0
-offset_left = 672.0
+offset_left = 528.0
 offset_top = 11.0
-offset_right = 767.0
+offset_right = 623.0
 offset_bottom = 50.0
 text = "Randomize"
+
+[node name="Generations" type="Label" parent="GUI/Toolbar"]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 19.0
+offset_right = 697.0
+offset_bottom = 42.0
+text = "Gen: 0"
 
 [connection signal="toggled" from="GUI/Toolbar/ToggleSimButton" to="." method="_on_toggle_sim_button_toggled"]
 [connection signal="drag_ended" from="GUI/Toolbar/SpeedSlider" to="." method="_on_speed_slider_drag_ended"]

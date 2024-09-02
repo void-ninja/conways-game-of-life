@@ -15,6 +15,7 @@ const RELATIVE_NEIGHBOR_COORDS :Array = [Vector2(-1,-1),Vector2(0,-1),Vector2(1,
 @onready var square = preload("res://square.tscn")
 @onready var toggle_sim_button: Button = $GUI/Toolbar/ToggleSimButton
 @onready var speed_slider: HSlider = $GUI/Toolbar/SpeedSlider
+@onready var generation_label: Label = $GUI/Toolbar/Generations
 
 ### Y axis is grid[], X axis is grid[][]
 var grid : Array
@@ -23,6 +24,12 @@ var next_gen_array : Array
 
 var tick_speed :float #in seconds, roughly
 var elapsed_time :float
+
+var gens_passed = 0 : 
+	set(value):
+		gens_passed = value
+		generation_label.text = "Gen: " + str(value)
+
 
 
 func _ready() -> void:
@@ -61,7 +68,8 @@ func _process(delta: float) -> void:
 			for y in GRID_SIDE_LENGTH_IN_SQUARES:
 				for x in GRID_SIDE_LENGTH_IN_SQUARES:
 					grid[y][x].is_alive = next_generation[y][x]
-					
+			
+			gens_passed += 1
 			elapsed_time = 0
 	
 
@@ -135,6 +143,7 @@ func _on_speed_slider_drag_ended(value_changed: bool) -> void:
 
 func _on_reset_pressed() -> void:
 	toggle_sim_button.text = "Start"
+	gens_passed = 0
 	is_simulating = false
 	for child in grid_display.get_children():
 		child.queue_free()
