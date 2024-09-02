@@ -26,13 +26,80 @@ color = Color(0.231395, 0.325574, 0.346782, 1)
 
 [node name="ToggleSimButton" type="Button" parent="GUI/Toolbar"]
 layout_mode = 0
-offset_left = 361.0
+offset_left = 360.0
 offset_top = 11.0
-offset_right = 439.0
-offset_bottom = 47.0
+offset_right = 438.0
+offset_bottom = 51.0
 theme_override_font_sizes/font_size = 20
 toggle_mode = true
 text = "Start"
 clip_text = true
 
+[node name="SpeedSlider" type="HSlider" parent="GUI/Toolbar"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 43.0
+offset_right = 317.0
+offset_bottom = 59.0
+max_value = 0.5
+step = 0.01
+value = 0.25
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="GUI/Toolbar/SpeedSlider"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = -40.0
+offset_right = 191.0
+offset_bottom = -17.0
+text = "Simulation Speed"
+
+[node name="Label2" type="Label" parent="GUI/Toolbar/SpeedSlider"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 12
+text = "0%"
+
+[node name="Label4" type="Label" parent="GUI/Toolbar/SpeedSlider"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = -16.0
+offset_right = 152.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 12
+text = "100%"
+
+[node name="Label3" type="Label" parent="GUI/Toolbar/SpeedSlider"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = -16.0
+offset_right = 280.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 12
+text = "200%"
+
+[node name="Reset" type="Button" parent="GUI/Toolbar"]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 11.0
+offset_right = 507.0
+offset_bottom = 51.0
+text = "Reset"
+
+[node name="Randomize" type="Button" parent="GUI/Toolbar"]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 11.0
+offset_right = 767.0
+offset_bottom = 50.0
+text = "Randomize"
+
 [connection signal="toggled" from="GUI/Toolbar/ToggleSimButton" to="." method="_on_toggle_sim_button_toggled"]
+[connection signal="drag_ended" from="GUI/Toolbar/SpeedSlider" to="." method="_on_speed_slider_drag_ended"]
+[connection signal="pressed" from="GUI/Toolbar/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="GUI/Toolbar/Randomize" to="." method="_on_randomize_pressed"]
